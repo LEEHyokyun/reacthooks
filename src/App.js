@@ -2,18 +2,30 @@ import logo from './logo.svg';
 import './App.css';
 import React, {Component, useState} from 'react';
 
-const App = () => {
-  const [count, setCount] = useState(0)
-  const [email, setEmail ] = useState('')
-  const updateEmail = e => {
-    const { target : {value} } = e
-    setEmail(value)
+const useInput = (initialValue) => {
+
+  //console.log(initialValue)
+  const [value, setValue] = useState(initialValue)
+  //console.log(value)
+  //console.log({value})
+  //as initiValue is inputted and adapted to value as object.
+  const onChange = (event) => {
+    const {target : {value}} = event
+    setValue(value)
   }
+  
+  return {value, onChange}
+  //it should be return as object.
+}
+
+const App = () => {
+
+  const name = useInput("Mr.")
+
   return(
     <>
-    {count}
-    <button onClick={()=>setCount(count+1)}>PLUS</button>
-    <input placeholder="EMAIL" value={email} onChange={updateEmail}/>
+    <h1>Hello</h1>
+    <input placeholder="Name?" {...name}/>
     </>
   )
 }
