@@ -1,24 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 
-class App extends React.Component{
-  state = {count : 0}
-
-  plus= () => {
-    this.setState({count : this.state.count + 1})
-  }
-
-
-  render() {
-    const {count} = this.state
-    return(
+const App = () => {
+  const [count, setCount] = useState(0)
+  return(
     <>
-    <div className="App">{count}</div>
-    <button onClick={this.plus}>PLUS</button>
+    {count}
+    <button onClick={()=>setCount(count+1)}>PLUS</button>
     </>
-    )
-  };
+  )
 }
 
 export default App;
