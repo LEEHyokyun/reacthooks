@@ -1,3 +1,6 @@
+import './App.css';
+import React, {Component, useState} from 'react';
+
 const useInput = (initialValue, validator) => {
 
   //console.log(initialValue, validator)
@@ -7,7 +10,7 @@ const useInput = (initialValue, validator) => {
   //as initiValue is inputted and adapted to value as object.
   const onChange = (event) => {
     const {target : {value}} = event
-    
+
     //valid is basically true.
     let isValid = true
 
@@ -19,9 +22,23 @@ const useInput = (initialValue, validator) => {
       setValue(value)
     }
   }
-  
+
   return {value, onChange}
   //it should be return as object.
 }
 
-export default useInput
+const App = () => {
+  const maxLen = (value) => {
+    return value.length < 10
+  }
+
+  const name = useInput("Mr.", maxLen)
+
+  return(
+    <>
+    <h1>Hello</h1>
+    <input placeholder="Name?" {...name}/>
+    </>
+  )
+}
+export default App;
