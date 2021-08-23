@@ -15,7 +15,7 @@ const content = [
   }
 ]
 
-const useTabs = (initialTab, content) => {
+export const useTabs = (initialTab, content) => {
   
   const [currentIndex, setCurrentIndex] = useState(initialTab)
   return{
@@ -42,4 +42,3 @@ const App = () => {
   )
 }
 
-export default App;
