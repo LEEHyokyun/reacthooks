@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const content = [
   {
@@ -18,6 +18,7 @@ const content = [
 const useTabs = (initialTab, content) => {
   
   const [currentIndex, setCurrentIndex] = useState(initialTab)
+  console.log("This is rendering! Check Wehn this occurs!")
   return{
     currentitem : content[currentIndex],
     ChangeItem : setCurrentIndex
@@ -25,6 +26,12 @@ const useTabs = (initialTab, content) => {
 }
 
 const App = () => {
+
+  //Check useEffect
+  useEffect( ()=> {
+    console.log("This is useEffect! Check When this occurs!")
+  }, []) //[content]
+
    const isVaildContent = (content) => {
     if(!content || !Array.isArray(content)){
       return true;
