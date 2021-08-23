@@ -2,16 +2,26 @@ import logo from './logo.svg';
 import './App.css';
 import React, {Component, useState} from 'react';
 
-const useInput = (initialValue) => {
+const useInput = (initialValue, validator) => {
 
-  //console.log(initialValue)
+  //console.log(initialValue, validator)
   const [value, setValue] = useState(initialValue)
   //console.log(value)
   //console.log({value})
   //as initiValue is inputted and adapted to value as object.
   const onChange = (event) => {
     const {target : {value}} = event
-    setValue(value)
+    
+    //valid is basically true.
+    let isValid = true
+
+    if(typeof validator === 'function'){
+      isValid = validator(value)
+    }
+
+    if(isValid){
+      setValue(value)
+    }
   }
   
   return {value, onChange}
@@ -19,8 +29,11 @@ const useInput = (initialValue) => {
 }
 
 const App = () => {
+  const maxLen = (value) => {
+    return value.length < 10
+  }
 
-  const name = useInput("Mr.")
+  const name = useInput("Mr.", maxLen)
 
   return(
     <>
