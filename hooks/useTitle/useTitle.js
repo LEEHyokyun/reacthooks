@@ -1,4 +1,4 @@
-
+import react, {useState, useEffect} from 'react'
 
 export const useTitle = initialtitle => {
   const [title, setTitle] = useState(initialtitle)
