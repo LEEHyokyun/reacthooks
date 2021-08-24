@@ -2,27 +2,27 @@ import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect, useRef} from 'react';
 
-const useBeforeLeave = (checkingfunc) => {
-  useEffect(()=>{
-    const listener = (event) => {
-      const {clientY} = event
-      if(clientY < 0){
-      console.log("CAUTION : MOUSE LEAVED")
-    }}
-    document.addEventListener("mouseleave", listener)
 
-    return () => document.removeEventListener("mouseleave", listener)
+const useFadeIn = (duration = 1) => {
+
+  const element = useRef();
+  useEffect(()=>{
+    const {current} = element
+    current.style.transition = `opacity ${duration}s`
+    current.style.opacity = 1
   },[])
+
+  return {ref:element, style:{opacity:0}}
 }
 
 const App = () => {
-
-  const checkingfunc = () => console.log("function started")
-  useBeforeLeave(checkingfunc)
+  const h1Element = useFadeIn(2)
+  const h2Element = useFadeIn(5)
 
   return(
     <div className="App">
-      <h1>HELLO!</h1>
+      <h1 {...h1Element}>HELLO!</h1>
+      <h2 {...h2Element}>HI!</h2>
     </div>
   )
 }
