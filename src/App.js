@@ -11,7 +11,11 @@ const useClick = (afterClicked) => {
       //it is not log, just adding event to DOM with specific function(=onClick)
       element.current.addEventListener("click", afterClicked)
     }
-  })
+      return () => {
+        if(element.current){
+        element.current.removeEventListener("click", afterClicked)
+    }}
+  }, [])
   console.log(element.current) //initially run, this would be "undefined"
   return element
 }
