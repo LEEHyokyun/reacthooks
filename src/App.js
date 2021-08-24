@@ -2,27 +2,23 @@ import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect, useRef} from 'react';
 
-const usePreventLeave = () => {
+const useBeforeLeave = (checkingfunc) => {
+  useEffect(()=>{
+    const listener = () => console.log("CAUTION : MOUSE LEAVED")
+    document.addEventListener("mouseleave", listener)
 
-  const listener = event => {
-    event.preventDefault();
-    event.returnValue=""
-  }
-
-  const protectLeave = () => window.addEventListener("beforeunload", listener)
-  const unprotectLeave = () => window.removeEventListener("beforeunload", listener)
-
-  return {protectLeave, unprotectLeave}
+    return () => document.removeEventListener("mouseleave", listener)
+  },[])
 }
 
 const App = () => {
 
-  const {protectLeave, unprotectLeave} = usePreventLeave()
+  const checkingfunc = () => console.log("function started")
+  useBeforeLeave(checkingfunc)
 
   return(
     <div className="App">
-      <button onClick={protectLeave}>LEAVE PROTECT</button>
-      <button onClick={unprotectLeave}>LEAVE UNPROTECT</button>
+      <h1>HELLO!</h1>
     </div>
   )
 }
