@@ -15,16 +15,4 @@ const usePreventLeave = () => {
   return {protectLeave, unprotectLeave}
 }
 
-const App = () => {
-
-  const {protectLeave, unprotectLeave} = usePreventLeave()
-
-  return(
-    <div className="App">
-      <button onClick={protectLeave}>LEAVE PROTECT</button>
-      <button onClick={unprotectLeave}>LEAVE UNPROTECT</button>
-    </div>
-  )
-}
-
-export default App;
+export default usePreventLeave
