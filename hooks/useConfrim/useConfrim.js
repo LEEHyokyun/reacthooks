@@ -18,16 +18,4 @@ const useConfirm = (message, confirmedAction) => {
   return confirmAction
 }
 
-const App = () => {
-
-  const confirmedAction = () => {console.log("YES")}
-  const confirmResult = useConfirm("Are you sure", confirmedAction)
-
-  return(
-    <div className="App">
-      <button onClick={()=>confirmResult()}>Check what happens</button>
-    </div>
-  )
-}
-
-export default App;
+export default useConfirm;
