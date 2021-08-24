@@ -25,12 +25,22 @@ const useTabs = (initialTab, content) => {
   }
 }
 
+const useTitle = initialtitle => {
+  const [title, setTitle] = useState(initialtitle)
+
+  const upDator = () => {
+    const htmltitle = document.querySelector("title")
+    htmltitle.innerText = title
+  }
+  useEffect(upDator, [title])
+
+  return setTitle
+}
+
 const App = () => {
 
-  //Check useEffect
-  useEffect( ()=> {
-    console.log("This is useEffect! Check When this occurs!")
-  }, []) //[content]
+  const updateTitle = useTitle("Ready")
+  setTimeout(() => updateTitle("Home"), 1000)
 
    const isVaildContent = (content) => {
     if(!content || !Array.isArray(content)){
