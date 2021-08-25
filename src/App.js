@@ -2,29 +2,33 @@ import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect, useRef} from 'react';
 
-const useScroll = () => {
-  const [coordinate, setCoordinate] = useState({
-    x:0, y:0
-  })
-  const handler = () => {
-    console.log("x: ", window.scrollX, "y: ", window.scrollY)
-    setCoordinate({x: window.scrollX, y: window.scrollY})
-  }
-  useEffect( ()=> {    
-    window.addEventListener("scroll", handler) 
-    return () => window.removeEventListener("scroll",handler)
-  },[])
+const useFullScreen = () => {
+  const element = useRef()
 
-  return coordinate
+  const triggerFullScreen = () => {
+    console.log("CLICKED")
+    if(element.current){
+      //Be aware of requestFullscreen function's name.
+      element.current.requestFullscreen()
+    }
+  }
+
+  const exitFullScreen = () => {
+    console.log("EXITED")
+    document.exitFullscreen()
+  }
+  
+
+  return {element, triggerFullScreen, exitFullScreen}
 }
 
 const App = () => {
-
-  const {y} = useScroll()
-
+  const {element, triggerFullScreen, exitFullScreen} = useFullScreen()
   return(
-    <div className="App" style={{height : '1000vh'}}>
-      <h1 style={{position: 'fixed', color: y < 200? "red" : "yellow"}}>HELLO</h1>
+    <div className="App">
+      <img ref={element} src="https://cdn.crowdpic.net/list-thumb/thumb_l_FBDF262955E7B1D3F010279AC94AF0CF.jpg"/>
+      <button onClick={triggerFullScreen}>FULL SCREEN</button>
+      <button onClick={exitFullScreen}>EXIT SCREEN</button>
     </div>
   )
 }
