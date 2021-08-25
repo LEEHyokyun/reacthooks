@@ -28,14 +28,4 @@ const useNotification = (title, options) => {
     return triggerNotification
   }
 
-const App = () => {
-  const triggerNotification = useNotification("Check Notification.")
-  return(
-    <div className="App">
-      <h1>HELLO</h1>
-      <button onClick={triggerNotification}></button>
-    </div>
-  )
-}
-
-export default App;
+export default useNotification;
